@@ -38,9 +38,6 @@ class GenerateBoard
       end
     end
 
-    puts "board in serivce"
-    puts board.inspect
-
     board
   end
 end
