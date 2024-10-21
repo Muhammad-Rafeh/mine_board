@@ -1,0 +1,59 @@
+<div class="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+  <h1 class="text-4xl font-bold text-center mb-8 text-gray-800">Create a New Board</h1>
+
+  <div class="max-w-5xl mx-auto bg-gray-50 p-6 rounded-lg shadow-md">
+    <%= form_with model: @board, local: true, class: "space-y-6" do |f| %>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div class="mb-4">
+          <%= f.label :email, "Email Address", class: "block text-sm font-semibold mb-2 text-gray-700" %>
+          <%= f.text_field :email, required: true, class: "w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :name, "Board Name", class: "block text-sm font-semibold mb-2 text-gray-700" %>
+          <%= f.text_field :name, required: true, class: "w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+        <div class="mb-4">
+          <%= f.label :height, "Board Height", class: "block text-sm font-semibold mb-2 text-gray-700" %>
+          <%= f.number_field :height, required: true, class: "w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :width, "Board Width", class: "block text-sm font-semibold mb-2 text-gray-700" %>
+          <%= f.number_field :width, required: true, class: "w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :number_of_mines, "Number of Mines", class: "block text-sm font-semibold mb-2 text-gray-700" %>
+          <%= f.number_field :number_of_mines, required: true, class: "w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+        </div>
+      </div>
+
+      <div class="flex justify-end">
+        <%= f.submit "Create Board", class: "w-full sm:w-auto bg-blue-600 text-white font-bold py-2 px-4 cursor-pointer rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 text-lg" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Boards display -->
+  <h2 class="text-3xl font-semibold text-center mt-8 mb-8">Available Boards</h2>
+
+  <div id="boardsContainer" class="flex flex-wrap justify-start gap-6">
+    <% @boards.each do |board| %>
+      <div class="board max-w-xs w-full p-4 border border-gray-200 rounded-md bg-gray-50" data-name="<%= board.name.downcase %>">
+        <p class="font-medium">Email: <%= board.email %></p>
+        <p class="font-medium">Name: <%= board.name %></p>
+        <p class="font-medium">Created At: <%= board.created_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+        <%= link_to "View #{board.name}", board_path(board), class: "text-blue-500 hover:underline" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Pagination -->
+  <div class="mt-8 flex justify-center space-x-2">
+    <%= render 'kaminari/paginator' %>
+  </div>
+</div>

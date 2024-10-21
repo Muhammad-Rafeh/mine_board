@@ -1,0 +1,13 @@
+<div class="flex justify-center items-center space-x-2">
+  <% if @boards.prev_page %>
+    <%= link_to "Previous", boards_path(page: @boards.prev_page), class: "px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600" %>
+  <% end %>
+
+  <% (1..@boards.total_pages).each do |page| %>
+    <%= link_to page, boards_path(page: page), class: "px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 #{'bg-blue-500 text-white' if page == @boards.current_page}" %>
+  <% end %>
+
+  <% if @boards.next_page %>
+    <%= link_to "Next", boards_path(page: @boards.next_page), class: "px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600" %>
+  <% end %>
+</div>

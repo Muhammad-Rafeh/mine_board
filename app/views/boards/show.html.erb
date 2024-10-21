@@ -1,0 +1,33 @@
+<div class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+  <h1 class="text-2xl font-bold text-center mb-4">Minesweeper Board</h1>
+  
+  <div class="mb-6 text-center">
+    <p class="text-lg"><strong>Email:</strong> <%= @board.email %></p>
+    <p class="text-lg"><strong>Name:</strong> <%= @board.name %></p>
+    <p class="text-lg"><strong>Height:</strong> <%= @board.height %></p>
+    <p class="text-lg"><strong>Width:</strong> <%= @board.width %></p>
+    <p class="text-lg"><strong>Number of Mines:</strong> <%= @board.number_of_mines %></p>
+    <p class="text-lg"><strong>Created at:</strong> <%= @board.created_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+  </div>
+
+  <div class="mb-6">
+    <p class="text-center">Go back to all boards <%= link_to "Here", boards_path, class: "text-blue-500 hover:underline" %></p>
+  </div>
+
+  <div class="flex flex-col">
+    <% @board.grid&.each do |row| %>
+    <div class="flex justify-center items-center">
+    <% row.each do |col| %>
+        <div class="w-12 h-12 flex items-center justify-center border border-gray-300 rounded-lg bg-gray-100">
+          <% if col == 0 %>
+            <span class="text-xl">⬜</span>
+          <% elsif col == "M" %>
+            <span class="text-xl">💣</span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+      
+    <% end %>
+  </div>
+</div>
